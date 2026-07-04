@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wanderlens — Travel Photography Prints</title>
+
+<!-- ============================================================
+  GOOGLE ANALYTICS 4 — PLACE YOUR TAG HERE
+  ------------------------------------------------------------
+  1. Create a GA4 property at analytics.google.com
+  2. Get your Measurement ID (looks like G-XXXXXXXXXX)
+  3. Replace G-XXXXXXXXXX in BOTH lines below with your real ID
+  4. Publish this file somewhere public (e.g. GitHub Pages,
+     Netlify drop, or even just open it locally for testing
+     with GA's DebugView)
+=============================================================== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --ink:#16213E;
+    --sand:#EDE6D6;
+    --paper:#FAF7F0;
+    --teal:#3E7C7C;
+    --film:#E2703A;
+    --line: rgba(22,33,62,0.15);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  a{color:inherit;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 5vw;
+  }
+  .logo{font-size:1.3rem; font-weight:600;}
+  .logo span{color:var(--film);}
+  nav{display:flex; gap:28px; font-size:0.95rem;}
+  nav a{text-decoration:none; cursor:pointer; opacity:0.75; transition:opacity .2s;}
+  nav a:hover{opacity:1;}
+  .cart-btn{
+    display:flex; align-items:center; gap:6px;
+    background:var(--ink); color:var(--paper);
+    padding:9px 16px; border-radius:2px; border:none;
+    cursor:pointer; font-size:0.9rem; font-family:'Inter';
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:64px 5vw 48px;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+  }
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono'; font-size:0.75rem; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--teal); margin-bottom:14px; display:block;
+  }
+  .hero h1{font-size:clamp(2.3rem, 5vw, 3.6rem); line-height:1.05; margin-bottom:18px;}
+  .hero p{max-width:480px; opacity:0.8; margin-bottom:26px;}
+  .btn-primary{
+    background:var(--film); color:var(--paper); border:none;
+    padding:14px 26px; font-size:0.95rem; border-radius:2px; cursor:pointer;
+    font-family:'Inter'; font-weight:500;
+  }
+  .contact-sheet{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:6px;
+    background:var(--ink); padding:10px; border-radius:4px;
+  }
+  .frame{
+    aspect-ratio:1; border-radius:2px; position:relative; overflow:hidden;
+  }
+  .frame::before{
+    content:''; position:absolute; inset:0;
+  }
+  .frame span{
+    position:absolute; bottom:4px; left:6px; font-family:'IBM Plex Mono';
+    font-size:0.6rem; color:rgba(255,255,255,0.85);
+  }
+  .f1::before{background:linear-gradient(135deg,#3E7C7C,#16213E);}
+  .f2::before{background:linear-gradient(135deg,#E2703A,#7a3d1a);}
+  .f3::before{background:linear-gradient(135deg,#EDE6D6,#a89f8a);}
+  .f4::before{background:linear-gradient(135deg,#16213E,#3E7C7C);}
+  .f5::before{background:linear-gradient(135deg,#7a3d1a,#E2703A);}
+  .f6::before{background:linear-gradient(135deg,#a89f8a,#EDE6D6);}
+
+  /* ---------- Section titles ---------- */
+  .section{padding:60px 5vw;}
+  .section-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:32px; border-bottom:1px solid var(--line); padding-bottom:16px;}
+  .section-head h2{font-size:1.8rem;}
+  .section-head span{font-family:'IBM Plex Mono'; font-size:0.8rem; opacity:0.6;}
+
+  /* ---------- Product grid ---------- */
+  .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:22px;}
+  .card{
+    background:var(--ink); border-radius:4px; padding:8px; cursor:pointer;
+    transition:transform .2s ease;
+  }
+  .card:hover{transform:translateY(-4px);}
+  .card-photo{aspect-ratio:4/3; border-radius:2px; margin-bottom:10px; position:relative;}
+  .card-body{padding:4px 8px 10px; color:var(--paper);}
+  .card-body h3{font-size:1rem; color:var(--paper); margin-bottom:4px;}
+  .card-body .price{font-family:'IBM Plex Mono'; color:var(--film); font-size:0.9rem;}
+  .card-body .loc{font-size:0.78rem; opacity:0.65; margin-bottom:8px;}
+  .add-btn{
+    width:100%; background:var(--sand); color:var(--ink); border:none;
+    padding:9px; border-radius:2px; font-size:0.85rem; cursor:pointer; font-family:'Inter'; font-weight:500;
+  }
+
+  /* ---------- About / Newsletter ---------- */
+  .about{background:var(--sand);}
+  .about-inner{max-width:640px;}
+  .newsletter-form{display:flex; gap:10px; margin-top:20px; max-width:420px;}
+  .newsletter-form input{
+    flex:1; padding:12px 14px; border:1px solid var(--line); border-radius:2px;
+    font-family:'Inter'; font-size:0.9rem; background:var(--paper);
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-form{max-width:480px; display:flex; flex-direction:column; gap:14px;}
+  .contact-form input, .contact-form textarea{
+    padding:12px 14px; border:1px solid var(--line); border-radius:2px;
+    font-family:'Inter'; font-size:0.9rem; background:var(--paper);
+  }
+  .contact-form textarea{min-height:110px; resize:vertical;}
+
+  footer{
+    padding:30px 5vw; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; font-size:0.8rem; opacity:0.6;
+    font-family:'IBM Plex Mono';
+  }
+
+  /* ---------- Modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(22,33,62,0.55);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--paper); max-width:520px; width:100%; border-radius:6px; padding:28px;
+    position:relative;
+  }
+  .modal-close{position:absolute; top:14px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer;}
+  .modal .price{font-family:'IBM Plex Mono'; color:var(--film); font-size:1.1rem; margin:10px 0 18px;}
+
+  /* ---------- Toast (fake event feedback) ---------- */
+  #toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--paper); padding:12px 22px; border-radius:3px;
+    font-size:0.85rem; opacity:0; pointer-events:none; transition:all .3s ease; z-index:200;
+  }
+  #toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* ---------- Event log panel (for learning GA) ---------- */
+  #event-log-toggle{
+    position:fixed; bottom:24px; right:24px; background:var(--teal); color:var(--paper);
+    border:none; width:50px; height:50px; border-radius:50%; cursor:pointer; font-size:1.2rem; z-index:150;
+  }
+  #event-log{
+    position:fixed; bottom:86px; right:24px; width:320px; max-height:400px; overflow-y:auto;
+    background:var(--ink); color:var(--paper); border-radius:6px; padding:16px; font-family:'IBM Plex Mono';
+    font-size:0.72rem; display:none; z-index:150; box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  }
+  #event-log.open{display:block;}
+  #event-log h4{font-family:'Inter'; font-size:0.85rem; margin-bottom:10px; color:var(--film);}
+  #event-log .entry{border-bottom:1px solid rgba(255,255,255,0.1); padding:6px 0;}
+
+  @media (max-width:760px){
+    .hero{grid-template-columns:1fr;}
+    nav{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">wander<span>lens</span></div>
+  <nav>
+    <a onclick="scrollToId('shop')">Shop</a>
+    <a onclick="scrollToId('about')">About</a>
+    <a onclick="scrollToId('contact')">Contact</a>
+  </nav>
+  <button class="cart-btn" onclick="viewCart()">Cart (<span id="cart-count">0</span>)</button>
+</header>
+
+<section class="hero">
+  <div>
+    <span class="hero-eyebrow">Fine art travel prints — no. 001</span>
+    <h1>Frames from the road, printed for your wall.</h1>
+    <p>Limited-run prints from ten years of travel photography — mountains, coastlines, and cities, developed and shipped from a small studio.</p>
+    <button class="btn-primary" onclick="scrollToId('shop')">Browse the collection</button>
+  </div>
+  <div class="contact-sheet">
+    <div class="frame f1"><span>001</span></div>
+    <div class="frame f2"><span>002</span></div>
+    <div class="frame f3"><span>003</span></div>
+    <div class="frame f4"><span>004</span></div>
+    <div class="frame f5"><span>005</span></div>
+    <div class="frame f6"><span>006</span></div>
+  </div>
+</section>
+
+<section class="section" id="shop">
+  <div class="section-head">
+    <h2>The Collection</h2>
+    <span>6 prints available</span>
+  </div>
+  <div class="grid" id="product-grid"></div>
+</section>
+
+<section class="section about" id="about">
+  <div class="about-inner">
+    <h2>About the studio</h2>
+    <p style="margin-top:14px; opacity:0.85;">Wanderlens is a one-person print studio. Every image on this site was shot on a single 35mm camera across twelve countries, scanned by hand, and printed in small batches of fifty.</p>
+    <div>
+      <label for="newsletter-email" style="display:block; margin-top:28px; font-weight:500;">Get notified about new print drops</label>
+      <form class="newsletter-form" id="newsletter-form">
+        <input type="email" id="newsletter-email" placeholder="you@example.com" required>
+        <button type="submit" class="btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="section-head">
+    <h2>Get in touch</h2>
+    <span>Custom orders & wholesale</span>
+  </div>
+  <form class="contact-form" id="contact-form">
+    <input type="text" placeholder="Your name" required>
+    <input type="email" placeholder="Your email" required>
+    <textarea placeholder="What are you looking for?" required></textarea>
+    <button type="submit" class="btn-primary" style="align-self:flex-start;">Send message</button>
+  </form>
+</section>
+
+<footer>
+  <span>© 2026 Wanderlens — practice site</span>
+  <span>Built for learning Google Analytics</span>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="card-photo" id="modal-photo" style="aspect-ratio:4/3;"></div>
+    <h3 id="modal-title" style="margin-top:14px;"></h3>
+    <p class="mono" id="modal-loc" style="opacity:0.6; font-size:0.85rem;"></p>
+    <div class="price" id="modal-price"></div>
+    <button class="btn-primary" id="modal-add-btn" style="width:100%;">Add to cart</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<button id="event-log-toggle" title="See what GA events are firing">📊</button>
+<div id="event-log">
+  <h4>GA4 events fired this session</h4>
+  <div id="event-log-entries"></div>
+</div>
+
+<script>
+  /* ============================================================
+     SAMPLE PRODUCT DATA
+  ============================================================= */
+  const products = [
+    {id:'p1', name:'Dawn over Dolomites', loc:'Italy, 2022', price:48, cls:'f1'},
+    {id:'p2', name:'Marrakech Doorway',   loc:'Morocco, 2021', price:42, cls:'f2'},
+    {id:'p3', name:'Salt Flat Horizon',   loc:'Bolivia, 2023', price:55, cls:'f3'},
+    {id:'p4', name:'Kyoto Backstreet',    loc:'Japan, 2019', price:44, cls:'f4'},
+    {id:'p5', name:'Sahara Dunes at Noon',loc:'Morocco, 2021', price:50, cls:'f5'},
+    {id:'p6', name:'Reykjavik Harbor',    loc:'Iceland, 2024', price:46, cls:'f6'},
+  ];
+
+  let cart = [];
+
+  /* ============================================================
+     RENDER PRODUCT GRID
+  ============================================================= */
+  const grid = document.getElementById('product-grid');
+  products.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-photo ${p.cls}" onclick="viewProduct('${p.id}')"></div>
+      <div class="card-body">
+        <h3 onclick="viewProduct('${p.id}')">${p.name}</h3>
+        <div class="loc">${p.loc}</div>
+        <div class="price">$${p.price}</div>
+        <button class="add-btn" onclick="addToCart('${p.id}', event)">Add to cart</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  /* ============================================================
+     GA4-STYLE EVENT HELPER
+     ------------------------------------------------------------
+     This wraps gtag() calls so that:
+       1. If GA hasn't been configured yet, the site doesn't break
+       2. Every event also gets logged to the on-page panel below,
+          so you can SEE what would be sent to Analytics without
+          needing your GA account open in another tab.
+
+     Recommended GA4 ecommerce events used below:
+       view_item, add_to_cart, view_cart, generate_lead
+  ============================================================= */
+  function trackEvent(eventName, params) {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, params);
+    }
+    logEvent(eventName, params);
+  }
+
+  function logEvent(eventName, params) {
+    const list = document.getElementById('event-log-entries');
+    const entry = document.createElement('div');
+    entry.className = 'entry';
+    entry.innerHTML = `<strong>${eventName}</strong><br>${JSON.stringify(params)}`;
+    list.prepend(entry);
+  }
+
+  /* ============================================================
+     PRODUCT MODAL / VIEW ITEM EVENT
+  ============================================================= */
+  function viewProduct(id) {
+    const p = products.find(x => x.id === id);
+    document.getElementById('modal-photo').className = `card-photo ${p.cls}`;
+    document.getElementById('modal-title').textContent = p.name;
+    document.getElementById('modal-loc').textContent = p.loc;
+    document.getElementById('modal-price').textContent = `$${p.price}`;
+    document.getElementById('modal-add-btn').onclick = () => addToCart(id);
+    document.getElementById('modal-overlay').classList.add('open');
+
+    trackEvent('view_item', {
+      currency: 'USD',
+      value: p.price,
+      items: [{ item_id: p.id, item_name: p.name, price: p.price }]
+    });
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+
+  /* ============================================================
+     ADD TO CART EVENT
+  ============================================================= */
+  function addToCart(id, event) {
+    if (event) event.stopPropagation();
+    const p = products.find(x => x.id === id);
+    cart.push(p);
+    document.getElementById('cart-count').textContent = cart.length;
+    closeModal();
+    showToast(`Added "${p.name}" to cart`);
+
+    trackEvent('add_to_cart', {
+      currency: 'USD',
+      value: p.price,
+      items: [{ item_id: p.id, item_name: p.name, price: p.price }]
+    });
+  }
+
+  /* ============================================================
+     VIEW CART EVENT
+  ============================================================= */
+  function viewCart() {
+    const total = cart.reduce((sum, p) => sum + p.price, 0);
+    showToast(cart.length ? `Cart: ${cart.length} item(s), $${total}` : 'Your cart is empty');
+
+    trackEvent('view_cart', {
+      currency: 'USD',
+      value: total,
+      items: cart.map(p => ({ item_id: p.id, item_name: p.name, price: p.price }))
+    });
+  }
+
+  /* ============================================================
+     NEWSLETTER SIGNUP -> generate_lead EVENT
+  ============================================================= */
+  document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('newsletter-email').value;
+    showToast('Subscribed! (this is a demo, nothing is actually sent)');
+    trackEvent('generate_lead', { method: 'newsletter_signup' });
+    e.target.reset();
+  });
+
+  /* ============================================================
+     CONTACT FORM -> generate_lead EVENT
+  ============================================================= */
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    showToast('Message sent! (this is a demo, nothing is actually sent)');
+    trackEvent('generate_lead', { method: 'contact_form' });
+    e.target.reset();
+  });
+
+  /* ============================================================
+     UTILITIES
+  ============================================================= */
+  function scrollToId(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  document.getElementById('event-log-toggle').addEventListener('click', () => {
+    document.getElementById('event-log').classList.toggle('open');
+  });
+
+  // Log the initial page_view too, so the panel isn't empty on load
+  window.addEventListener('load', () => {
+    logEvent('page_view', { page_title: document.title, page_location: window.location.href });
+  });
+</script>
+
+</body>
+</html>
